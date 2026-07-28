@@ -1,6 +1,7 @@
 <?php
 /**
  * Truvista header — Çeviri Sepeti
+ * Orta kısım: 'logo' CPT'den beslenen kesintisiz kayan logo şeridi
  */
 ?>
 <!DOCTYPE html>
@@ -28,30 +29,54 @@
             <span class="tv-logo-text">Çeviri Sepeti</span>
         </a>
 
-        <nav class="tv-nav-menu" id="tv-nav-menu" aria-label="Ana menü">
-            <ul>
-                <li><a href="<?php echo esc_url(home_url('/')); ?>">Anasayfa</a></li>
-                <li><a href="<?php echo esc_url(home_url('/hakkimizda/')); ?>">Hakkımızda</a></li>
-                <li><a href="<?php echo esc_url(home_url('/hizmetler/')); ?>">Hizmetler</a></li>
-                <li><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a></li>
-                <li><a href="<?php echo esc_url(home_url('/iletisim/')); ?>">İletişim</a></li>
-            </ul>
-        </nav>
+        <?php
+        // ==== Orta: 'logo' CPT'den kayan şerit ====
+        $header_logos = [];
+        $hlq = new WP_Query([
+            'post_type'      => 'logo',
+            'post_status'    => 'publish',
+            'posts_per_page' => -1,
+            'orderby'        => 'menu_order',
+            'order'          => 'ASC',
+            'no_found_rows'  => true,
+        ]);
+        if ($hlq->have_posts()) {
+            while ($hlq->have_posts()) {
+                $hlq->the_post();
+                if (!has_post_thumbnail()) continue;
+                $header_logos[] = [
+                    'img' => get_the_post_thumbnail_url(get_the_ID(), 'medium'),
+                    'alt' => get_the_title(),
+                ];
+            }
+            wp_reset_postdata();
+        }
+        ?>
+        <?php if (!empty($header_logos)) : ?>
+        <div class="tv-header-marquee" aria-label="Kurumsal müşterilerimiz">
+            <div class="tv-header-marquee-track">
+                <?php
+                // İki kez basıyoruz ki kesintisiz döngü olsun
+                for ($rep = 0; $rep < 2; $rep++) :
+                    foreach ($header_logos as $lg) : ?>
+                    <span class="tv-header-logo">
+                        <img src="<?php echo esc_url($lg['img']); ?>" alt="<?php echo esc_attr($lg['alt']); ?>" loading="lazy">
+                    </span>
+                <?php endforeach;
+                endfor; ?>
+            </div>
+        </div>
+        <?php endif; ?>
 
         <div class="tv-nav-right">
-            <a href="<?php echo esc_url(home_url('/fiyat-hesapla/')); ?>" class="tv-btn tv-btn-header">Fiyat Hesapla</a>
-            <button class="tv-nav-toggle" id="tv-nav-toggle" aria-label="Menü" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
+            <a href="<?php echo esc_url(home_url('/subelerimiz/')); ?>" class="tv-btn tv-btn-header">Şubelerimiz</a>
         </div>
     </div>
 </header>
 
 <script>
 (function(){
-    var t=document.getElementById('tv-nav-toggle'),m=document.getElementById('tv-nav-menu');
-    if(t&&m){t.addEventListener('click',function(){var o=m.classList.toggle('open');t.setAttribute('aria-expanded',o);});}
     var h=document.getElementById('tv-site-header');
-    window.addEventListener('scroll',function(){if(window.scrollY>20)h.classList.add('scrolled');else h.classList.remove('scrolled');});
+    if(h){window.addEventListener('scroll',function(){if(window.scrollY>20)h.classList.add('scrolled');else h.classList.remove('scrolled');});}
 })();
 </script>
