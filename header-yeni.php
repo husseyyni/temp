@@ -1,7 +1,7 @@
 <?php
 /**
  * Truvista header — Çeviri Sepeti
- * Orta kısım: 'logo' CPT'den beslenen kesintisiz kayan logo şeridi
+ * Menü: Anasayfa, Hizmetler, Blog, Diller, Fiyatlar, Hakkımızda, Kurumsal
  */
 ?>
 <!DOCTYPE html>
@@ -21,62 +21,38 @@
     <div class="tv-wrap tv-nav">
         <a href="<?php echo esc_url(home_url('/')); ?>" class="tv-logo" aria-label="Çeviri Sepeti">
             <span class="tv-logo-mark" aria-hidden="true">
-                <svg viewBox="0 0 32 32" width="30" height="30" fill="none">
-                    <circle cx="16" cy="16" r="15" fill="rgba(255,255,255,.15)"/>
+                <svg viewBox="0 0 32 32" width="32" height="32" fill="none">
+                    <circle cx="16" cy="16" r="15" fill="rgba(255,255,255,.18)"/>
                     <path d="M16 7c-4 1.5-6 4.5-6 8 0 3 2 5.5 6 6.5 0-3.5.7-6 3.5-9-2 .7-3.5 2-4.2 4.2-.7-2.8 0-5.6.7-9.7z" fill="currentColor"/>
                 </svg>
             </span>
             <span class="tv-logo-text">Çeviri Sepeti</span>
         </a>
 
-        <?php
-        // ==== Orta: 'logo' CPT'den kayan şerit ====
-        $header_logos = [];
-        $hlq = new WP_Query([
-            'post_type'      => 'logo',
-            'post_status'    => 'publish',
-            'posts_per_page' => -1,
-            'orderby'        => 'menu_order',
-            'order'          => 'ASC',
-            'no_found_rows'  => true,
-        ]);
-        if ($hlq->have_posts()) {
-            while ($hlq->have_posts()) {
-                $hlq->the_post();
-                if (!has_post_thumbnail()) continue;
-                $header_logos[] = [
-                    'img' => get_the_post_thumbnail_url(get_the_ID(), 'medium'),
-                    'alt' => get_the_title(),
-                ];
-            }
-            wp_reset_postdata();
-        }
-        ?>
-        <?php if (!empty($header_logos)) : ?>
-        <div class="tv-header-marquee" aria-label="Kurumsal müşterilerimiz">
-            <div class="tv-header-marquee-track">
-                <?php
-                // İki kez basıyoruz ki kesintisiz döngü olsun
-                for ($rep = 0; $rep < 2; $rep++) :
-                    foreach ($header_logos as $lg) : ?>
-                    <span class="tv-header-logo">
-                        <img src="<?php echo esc_url($lg['img']); ?>" alt="<?php echo esc_attr($lg['alt']); ?>" loading="lazy">
-                    </span>
-                <?php endforeach;
-                endfor; ?>
-            </div>
-        </div>
-        <?php endif; ?>
+        <nav class="tv-nav-menu" id="tv-nav-menu" aria-label="Ana menü">
+            <ul>
+                <li><a href="<?php echo esc_url(home_url('/')); ?>" class="active">Anasayfa</a></li>
+                <li><a href="<?php echo esc_url(home_url('/hizmetler/')); ?>">Hizmetler</a></li>
+                <li><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a></li>
+                <li><a href="<?php echo esc_url(home_url('/diller/')); ?>">Diller</a></li>
+                <li><a href="<?php echo esc_url(home_url('/fiyatlar/')); ?>">Fiyatlar</a></li>
+                <li><a href="<?php echo esc_url(home_url('/hakkimizda/')); ?>">Hakkımızda</a></li>
+                <li><a href="<?php echo esc_url(home_url('/kurumsal/')); ?>">Kurumsal</a></li>
+            </ul>
+        </nav>
 
         <div class="tv-nav-right">
             <a href="<?php echo esc_url(home_url('/subelerimiz/')); ?>" class="tv-btn tv-btn-header">Şubelerimiz</a>
+            <button class="tv-nav-toggle" id="tv-nav-toggle" aria-label="Menü" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </div>
 </header>
 
 <script>
 (function(){
-    var h=document.getElementById('tv-site-header');
-    if(h){window.addEventListener('scroll',function(){if(window.scrollY>20)h.classList.add('scrolled');else h.classList.remove('scrolled');});}
+    var t=document.getElementById('tv-nav-toggle'),m=document.getElementById('tv-nav-menu');
+    if(t&&m){t.addEventListener('click',function(){var o=m.classList.toggle('open');t.setAttribute('aria-expanded',o);});}
 })();
 </script>
