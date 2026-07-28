@@ -22,7 +22,9 @@ $tpl = get_template_directory_uri();
                 </div>
             </div>
             <div class="tv-hero-btm">
-                <h1 class="tv-hero-title"><span class="tv-arrow" aria-hidden="true">&rarr;</span>Güvenilir, Hızlı ve Yeminli <span class="accent">Tercüme</span> Çözümleri</h1>
+                <h1 class="tv-hero-title"><span class="tv-arrow" aria-hidden="true">&rarr;</span>Güvenilir, Hızlı ve Yeminli <span class="accent">Tercüme</span> Çözümleri<span class="tv-hero-avatars" aria-hidden="true">
+                    <span class="av">A</span><span class="av">B</span><span class="av">C</span><span class="av av-plus">+</span>
+                </span></h1>
                 <a href="#hakkimizda" class="tv-scroll" aria-label="Aşağı">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
                 </a>
@@ -30,17 +32,36 @@ $tpl = get_template_directory_uri();
         </div>
     </section>
 
-    <!-- ============================ LOGO ŞERİDİ ============================ -->
+    <!-- ============================ LOGO ŞERİDİ (CPT'den kayan) ============================ -->
+    <?php
+    $strip_logos = [];
+    $slq = new WP_Query([
+        'post_type'      => 'logo',
+        'post_status'    => 'publish',
+        'posts_per_page' => -1,
+        'orderby'        => 'menu_order',
+        'order'          => 'ASC',
+        'no_found_rows'  => true,
+    ]);
+    if ($slq->have_posts()) {
+        while ($slq->have_posts()) { $slq->the_post();
+            if (!has_post_thumbnail()) continue;
+            $strip_logos[] = ['img'=>get_the_post_thumbnail_url(get_the_ID(),'medium'),'alt'=>get_the_title()];
+        }
+        wp_reset_postdata();
+    }
+    ?>
+    <?php if (!empty($strip_logos)) : ?>
     <section class="tv-logos-strip">
-        <div class="tv-wrap tv-logos-row">
-            <span class="lg">ÖZALTIN</span>
-            <span class="lg">UPL</span>
-            <span class="lg">DPET</span>
-            <span class="lg">Shell</span>
-            <span class="lg">EnerjiSA</span>
-            <span class="lg">Ziraat</span>
+        <div class="tv-logos-marquee">
+            <div class="tv-logos-track">
+                <?php for ($r=0;$r<2;$r++): foreach ($strip_logos as $lg): ?>
+                <span class="lg-item"><img src="<?php echo esc_url($lg['img']); ?>" alt="<?php echo esc_attr($lg['alt']); ?>" loading="lazy"></span>
+                <?php endforeach; endfor; ?>
+            </div>
         </div>
     </section>
+    <?php endif; ?>
 
     <!-- ============================ HAKKIMIZDA ============================ -->
     <section class="tv-sec" id="hakkimizda">
