@@ -1,0 +1,287 @@
+/* ==========================================================================
+   ÇEVİRİ SEPETİ — ANASAYFA (Truvista stili)
+   Bu dosya sadece front-page/anasayfa için. styles.css'i ezmez; sonra yüklenir.
+   Palet örnekten (Truvista) alınmıştır: adaçayı yeşili #77846A
+   ========================================================================== */
+:root{
+  --tv-sage:#77846A;
+  --tv-sage-btn:#3f4a37;
+  --tv-sage-btn-h:#333d2c;
+  --tv-sage-light:#AAB99A;
+  --tv-sage-tint:#EDF0E8;
+  --tv-cream:#F3F4EF;
+  --tv-cream2:#ECEEE6;
+  --tv-ink:#26291F;
+  --tv-ink-soft:#6A6E60;
+  --tv-footer:#1a1f16;
+  --tv-line:#E6E6DF;
+  --tv-star:#E8B84B;
+  --tv-white:#fff;
+}
+
+/* Anasayfa body — mevcut header/footer ile uyum için */
+body.page-template-template-anasayfa,
+body.home{background:#fff}
+
+/* ===== container ===== */
+.tv-main *{box-sizing:border-box}
+.tv-main{font-family:'Manrope','Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:var(--tv-ink);line-height:1.6}
+.tv-wrap{max-width:1200px;margin:0 auto;padding:0 30px}
+.tv-main h1,.tv-main h2,.tv-main h3,.tv-main h4,.tv-main h5{font-family:inherit;line-height:1.12;letter-spacing:-.02em;font-weight:800;margin:0}
+.tv-main a{text-decoration:none;color:inherit}
+.tv-main img{max-width:100%;display:block}
+.tv-main ul{list-style:none;margin:0;padding:0}
+
+.tv-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:100px;font-weight:600;font-size:14.5px;cursor:pointer;border:none;transition:.22s;font-family:inherit;line-height:1}
+.tv-btn-dark{background:var(--tv-sage-btn);color:#fff}
+.tv-btn-dark:hover{background:var(--tv-sage-btn-h);color:#fff}
+.tv-btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.tv-btn-ghost:hover{background:rgba(255,255,255,.14);color:#fff}
+.tv-btn-ghost-dark{background:transparent;color:var(--tv-ink);border:1px solid var(--tv-line)}
+.tv-btn-ghost-dark:hover{border-color:var(--tv-ink)}
+.tv-btn-light{background:#fff;color:var(--tv-ink)}
+.tv-btn-light:hover{background:#f0f0ea;color:var(--tv-ink)}
+.tv-btn .ar{display:inline-flex}
+
+.tv-eyebrow{font-size:13px;font-weight:700;color:var(--tv-ink-soft);margin-bottom:14px;display:inline-block}
+.tv-sec{padding:80px 0}
+.tv-h2{font-size:34px;font-weight:800;line-height:1.12}
+.tv-lead{color:var(--tv-ink-soft);font-size:15.5px;margin-top:14px}
+
+/* ===== HERO ===== */
+.tv-hero{background:var(--tv-sage);position:relative;overflow:hidden;padding:70px 0 64px;margin-top:0}
+.tv-hero::after{content:"";position:absolute;right:-140px;bottom:-140px;width:420px;height:420px;border-radius:50%;border:1px solid rgba(255,255,255,.14)}
+.tv-hero-top{display:flex;justify-content:flex-end;margin-bottom:70px;position:relative;z-index:2}
+.tv-hero-top-inner{max-width:440px;color:#fff}
+.tv-hero-top-inner p{font-size:15px;opacity:.92;margin-bottom:22px;line-height:1.6;color:#fff}
+.tv-hero-top-btns{display:flex;gap:12px;flex-wrap:wrap}
+.tv-hero-btm{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;position:relative;z-index:2}
+.tv-hero-title{color:#fff;font-size:54px;font-weight:800;line-height:1.05;max-width:760px}
+.tv-hero-title .tv-arrow{display:inline-block;margin-right:10px;font-weight:400}
+.tv-hero-title .accent{color:#EAD98A}
+.tv-scroll{width:62px;height:62px;border-radius:50%;border:1px solid rgba(255,255,255,.4);display:grid;place-items:center;color:#fff;flex-shrink:0;transition:.2s}
+.tv-scroll:hover{background:rgba(255,255,255,.12)}
+
+/* ===== HAKKIMIZDA ===== */
+.tv-about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.tv-about-media img{border-radius:20px;width:100%;height:100%;object-fit:cover;max-height:460px}
+.tv-about-media .ph{background:var(--tv-cream);border-radius:20px;min-height:380px;display:grid;place-items:center;color:#b7bbac;font-size:14px}
+.tv-about h2{font-size:38px;margin-bottom:18px}
+.tv-about p{color:var(--tv-ink-soft);font-size:15px;margin-bottom:24px}
+.tv-about-feats{display:flex;gap:30px;margin-bottom:26px;flex-wrap:wrap}
+.tv-about-feat{display:flex;gap:12px;align-items:flex-start}
+.tv-about-feat .fi{width:42px;height:42px;border-radius:11px;background:var(--tv-sage-tint);display:grid;place-items:center;color:var(--tv-sage-btn);flex-shrink:0}
+.tv-about-feat strong{display:block;font-size:15px;font-weight:700}
+.tv-about-feat small{font-size:13px;color:var(--tv-ink-soft)}
+
+/* ===== STATS ===== */
+.tv-stats{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--tv-line);border-bottom:1px solid var(--tv-line);padding:42px 0;flex-wrap:wrap}
+.tv-stat{flex:1;min-width:140px}
+.tv-stat b{font-size:50px;font-weight:800;display:block;line-height:1;letter-spacing:-.03em}
+.tv-stat span{color:var(--tv-ink-soft);font-size:14px}
+
+/* ===== HİZMETLER (Solutions) ===== */
+.tv-sol-head{margin-bottom:44px;display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
+.tv-sol-head .l{max-width:520px}
+.tv-sol-head .r{max-width:360px;color:var(--tv-ink-soft);font-size:14px}
+.tv-sol-head h2{font-size:36px}
+.tv-sol-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.tv-sol-card{background:var(--tv-cream);border-radius:18px;padding:30px;transition:.28s;position:relative}
+.tv-sol-card:hover{background:#fff;box-shadow:0 20px 50px rgba(40,50,30,.13);transform:translateY(-6px)}
+.tv-sol-card.tv-featured{background:#fff;box-shadow:0 14px 40px rgba(40,50,30,.10)}
+.tv-sol-ico{width:52px;height:52px;border-radius:50%;background:var(--tv-sage-light);display:grid;place-items:center;margin-bottom:22px;color:#fff}
+.tv-sol-thumb{width:100%;height:150px;object-fit:cover;border-radius:12px;margin-bottom:18px}
+.tv-sol-card h3{font-size:20px;font-weight:800;margin-bottom:10px}
+.tv-sol-badge{display:inline-block;background:var(--tv-sage-tint);color:var(--tv-sage-btn);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:10px}
+.tv-sol-card p{font-size:14px;color:var(--tv-ink-soft);margin-bottom:20px}
+.tv-sol-more{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700}
+.tv-sol-more .plus{width:30px;height:30px;border-radius:50%;background:var(--tv-sage-btn);color:#fff;display:grid;place-items:center;transition:.2s}
+.tv-sol-card:hover .tv-sol-more .plus{background:var(--tv-sage);transform:rotate(90deg)}
+.tv-sol-cta{margin-top:36px}
+.tv-viewall{display:inline-flex;align-items:center;gap:8px;background:var(--tv-sage-light);color:var(--tv-sage-btn);padding:11px 22px;border-radius:100px;font-weight:600;font-size:14px}
+
+/* ===== NEDEN BİZ (Built on Trust) ===== */
+.tv-why{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.tv-why-panel{background:var(--tv-footer);border-radius:22px;padding:42px;color:#fff}
+.tv-why-panel .col+.col{margin-top:26px;padding-top:26px;border-top:1px solid rgba(255,255,255,.12)}
+.tv-why-col-title{font-size:17px;color:var(--tv-sage-light);margin-bottom:14px}
+.tv-why-sub{font-size:14px;font-weight:700;margin:14px 0 8px}
+.tv-why-list li{display:flex;gap:10px;font-size:14px;padding:5px 0;opacity:.92}
+.tv-why-list .ck{color:#EAD98A;flex-shrink:0}
+.tv-why-l h2{font-size:34px;margin-bottom:18px}
+.tv-why-l p{color:var(--tv-ink-soft);font-size:15px;margin-bottom:26px}
+
+/* ===== YORUMLAR ===== */
+.tv-rev-head{margin-bottom:44px}
+.tv-rev-wrap{position:relative}
+.tv-rev-track{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.tv-rev-card{border:1px solid var(--tv-line);border-radius:16px;padding:26px;background:#fff}
+.tv-rev-stars{color:var(--tv-star);font-size:14px;margin-bottom:14px;letter-spacing:2px}
+.tv-rev-card .txt{font-size:14px;color:var(--tv-ink-soft);margin-bottom:20px;line-height:1.6}
+.tv-rev-user{display:flex;align-items:center;gap:11px}
+.tv-rev-user img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+.tv-rev-user b{font-size:14px;display:block}
+.tv-rev-user span{font-size:12px;color:var(--tv-ink-soft)}
+.tv-rev-nav{display:flex;gap:10px;justify-content:center;margin-top:30px}
+.tv-rev-nav button{width:44px;height:44px;border-radius:50%;border:1px solid var(--tv-line);background:#fff;cursor:pointer;display:grid;place-items:center;transition:.2s}
+.tv-rev-nav button:hover{background:var(--tv-sage-btn);color:#fff;border-color:var(--tv-sage-btn)}
+
+/* ===== DİL BAYRAKLARI (marquee) ===== */
+.tv-flags{padding:70px 0;overflow:hidden;background:#fff}
+.tv-flags-head{text-align:center;margin-bottom:40px}
+.tv-flags-head .tag{font-size:13px;font-weight:700;color:var(--tv-ink-soft);letter-spacing:.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:12px}
+.tv-flags-head .tag::before,.tv-flags-head .tag::after{content:"";width:30px;height:1px;background:var(--tv-line)}
+.tv-flags-head h2{font-size:32px;margin:14px 0 10px}
+.tv-flags-head p{color:var(--tv-ink-soft);font-size:15px}
+.tv-flag-row{display:flex;overflow:hidden;margin-bottom:14px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.tv-flag-track{display:flex;gap:12px;flex-shrink:0;animation:tv-marquee 40s linear infinite}
+.tv-flag-row--rtl .tv-flag-track{animation-direction:reverse}
+.tv-flag-badge{display:inline-flex;align-items:center;gap:8px;background:var(--tv-cream);border:1px solid var(--tv-line);padding:9px 18px;border-radius:100px;white-space:nowrap;font-size:14px;font-weight:600}
+.tv-flag-emoji{font-size:18px}
+@keyframes tv-marquee{to{transform:translateX(-50%)}}
+
+/* ===== KURUMSAL LOGOLAR ===== */
+.tv-partners{display:grid;grid-template-columns:1fr 1.2fr;gap:56px;align-items:center}
+.tv-partners h2{font-size:32px;margin:14px 0 22px}
+.tv-logos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tv-logo-cell{background:#fff;border:1px solid var(--tv-line);border-radius:16px;height:110px;display:grid;place-items:center;padding:20px}
+.tv-logo-cell img{max-height:56px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.75;transition:.2s}
+.tv-logo-cell:hover img{filter:none;opacity:1}
+
+/* ===== BLOG ===== */
+.tv-blog-head{margin-bottom:44px;text-align:center}
+.tv-blog-head h2{font-size:34px;margin-top:14px}
+.tv-blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.tv-blog-card{background:#fff}
+.tv-blog-card .bimg{border-radius:16px;height:190px;overflow:hidden;margin-bottom:16px}
+.tv-blog-card .bimg img{width:100%;height:100%;object-fit:cover;transition:.3s}
+.tv-blog-card:hover .bimg img{transform:scale(1.04)}
+.tv-blog-meta{font-size:12.5px;color:var(--tv-ink-soft);margin-bottom:8px;display:flex;gap:14px}
+.tv-blog-meta li{display:flex;align-items:center;gap:5px}
+.tv-blog-card h3{font-size:17px;font-weight:800;margin-bottom:12px;line-height:1.3}
+.tv-blog-card h3 a:hover{color:var(--tv-sage-btn)}
+.tv-blog-more{font-size:13px;font-weight:700;display:inline-flex;gap:6px;align-items:center}
+.tv-blog-cta{text-align:center;margin-top:40px}
+
+/* ===== SSS ===== */
+.tv-faq-head{text-align:center;max-width:640px;margin:0 auto 44px}
+.tv-faq-head h2{font-size:34px;margin-top:14px}
+.tv-faq-head p{color:var(--tv-ink-soft);font-size:15px;margin-top:12px}
+.tv-faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:960px;margin:0 auto}
+.tv-faq-item{border:1px solid var(--tv-line);border-radius:14px;margin-bottom:14px;overflow:hidden;background:#fff}
+.tv-faq-q{width:100%;display:flex;align-items:center;gap:12px;padding:20px;background:none;border:none;cursor:pointer;text-align:left;font-family:inherit;font-size:15px;font-weight:700;color:var(--tv-ink)}
+.tv-faq-q .qi{width:34px;height:34px;border-radius:10px;background:var(--tv-sage-tint);display:grid;place-items:center;color:var(--tv-sage-btn);flex-shrink:0}
+.tv-faq-q .qt{flex:1}
+.tv-faq-q .tog{flex-shrink:0;transition:.2s;color:var(--tv-sage-btn)}
+.tv-faq-item.open .tog{transform:rotate(45deg)}
+.tv-faq-a{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}
+.tv-faq-item.open .tv-faq-a{padding:0 20px 20px;max-height:400px}
+.tv-faq-a p{font-size:14px;color:var(--tv-ink-soft);margin:0;line-height:1.6}
+.tv-faq-cta{text-align:center;margin-top:36px}
+.tv-faq-cta p{color:var(--tv-ink-soft);font-size:14px;margin-bottom:14px}
+
+/* ===== İLETİŞİM ===== */
+.tv-contact{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:start}
+.tv-contact h2{font-size:34px;margin:14px 0 16px}
+.tv-contact .cdesc{color:var(--tv-ink-soft);font-size:15px;margin-bottom:28px}
+.tv-cd{display:flex;gap:14px;margin-bottom:20px;align-items:flex-start}
+.tv-cd .ci{width:44px;height:44px;border-radius:12px;background:var(--tv-sage-tint);display:grid;place-items:center;color:var(--tv-sage-btn);flex-shrink:0}
+.tv-cd strong{display:block;font-size:14px;font-weight:700;margin-bottom:2px}
+.tv-cd a,.tv-cd span{font-size:14px;color:var(--tv-ink-soft)}
+.tv-form-wrap{background:var(--tv-cream);border-radius:20px;padding:34px}
+.tv-form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.tv-fg{margin-bottom:16px;display:flex;flex-direction:column}
+.tv-fg label{font-size:13px;font-weight:600;margin-bottom:7px}
+.tv-fg input,.tv-fg select,.tv-fg textarea{padding:13px 15px;border:1px solid var(--tv-line);border-radius:11px;font-family:inherit;font-size:14px;background:#fff;color:var(--tv-ink);transition:.2s}
+.tv-fg input:focus,.tv-fg select:focus,.tv-fg textarea:focus{outline:none;border-color:var(--tv-sage)}
+.tv-fg textarea{resize:vertical;min-height:110px}
+#anasayfa-form-msg{padding:14px;border-radius:11px;margin-bottom:16px;font-size:14px}
+
+/* ===== FOOT CTA ===== */
+.tv-foot-cta{background:var(--tv-sage);border-radius:22px;padding:46px;display:flex;justify-content:space-between;align-items:center;gap:30px}
+.tv-foot-cta h2{color:#fff;font-size:28px;max-width:560px}
+.tv-foot-cta .tv-eyebrow{color:rgba(255,255,255,.85)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .tv-hero-top{display:none}
+  .tv-hero-title{font-size:34px}
+  .tv-hero-btm{flex-direction:column;align-items:flex-start;gap:26px}
+  .tv-about,.tv-why,.tv-partners,.tv-contact{grid-template-columns:1fr;gap:34px}
+  .tv-sol-grid,.tv-rev-track,.tv-blog-grid,.tv-faq-grid,.tv-logos-grid{grid-template-columns:1fr}
+  .tv-logos-grid{grid-template-columns:1fr 1fr}
+  .tv-stats{gap:26px}
+  .tv-stat b{font-size:38px}
+  .tv-sec{padding:54px 0}
+  .tv-h2,.tv-about h2,.tv-sol-head h2,.tv-why-l h2,.tv-blog-head h2,.tv-faq-head h2,.tv-contact h2{font-size:28px}
+  .tv-form-row{grid-template-columns:1fr}
+  .tv-foot-cta{flex-direction:column;align-items:flex-start;padding:32px}
+  .tv-why-panel{padding:30px}
+}
+@media(prefers-reduced-motion:reduce){.tv-main *{transition:none!important;animation:none!important}}
+
+/* ==========================================================================
+   HEADER (Truvista) — beyaz/transparan, scroll'da beyaz
+   ========================================================================== */
+.tv-site-header{position:sticky;top:0;z-index:100;background:var(--tv-sage);transition:background .3s,box-shadow .3s}
+.tv-site-header.scrolled{background:#fff;box-shadow:0 2px 20px rgba(40,50,30,.08)}
+.tv-nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+.tv-logo{display:flex;align-items:center;gap:9px;font-family:'Manrope',sans-serif;font-weight:800;font-size:20px;color:#fff;transition:color .3s}
+.tv-site-header.scrolled .tv-logo{color:var(--tv-sage-btn)}
+.tv-logo-mark{display:inline-flex;color:#fff;transition:color .3s}
+.tv-site-header.scrolled .tv-logo-mark{color:var(--tv-sage)}
+.tv-nav-menu ul{display:flex;gap:32px;list-style:none;margin:0;padding:0}
+.tv-nav-menu a{font-size:14.5px;font-weight:500;color:rgba(255,255,255,.9);transition:color .2s}
+.tv-nav-menu a:hover{color:#fff}
+.tv-site-header.scrolled .tv-nav-menu a{color:var(--tv-ink-soft)}
+.tv-site-header.scrolled .tv-nav-menu a:hover{color:var(--tv-sage-btn)}
+.tv-nav-right{display:flex;align-items:center;gap:14px}
+.tv-btn-header{background:#2f3829;color:#fff}
+.tv-btn-header:hover{background:#262e20;color:#fff}
+.tv-site-header.scrolled .tv-btn-header{background:var(--tv-sage-btn)}
+.tv-nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+.tv-nav-toggle span{width:24px;height:2px;background:#fff;border-radius:2px;transition:.3s}
+.tv-site-header.scrolled .tv-nav-toggle span{background:var(--tv-ink)}
+
+/* ==========================================================================
+   FOOTER (Truvista) — koyu zemin
+   ========================================================================== */
+.tv-site-footer{background:var(--tv-footer);color:#fff;padding:70px 0 30px}
+.tv-footer-grid{display:grid;grid-template-columns:1.7fr 1fr 1fr 1.3fr;gap:40px;padding-bottom:44px}
+.tv-footer-brand .tv-logo{color:#fff;margin-bottom:16px}
+.tv-footer-brand .tv-logo-mark{color:#fff}
+.tv-footer-brand p{font-size:13.5px;opacity:.6;max-width:290px;line-height:1.6;margin:0 0 20px}
+.tv-footer-social{display:flex;gap:12px}
+.tv-footer-social a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:grid;place-items:center;color:#fff;opacity:.75;transition:.2s}
+.tv-footer-social a:hover{opacity:1;background:rgba(255,255,255,.1);border-color:transparent}
+.tv-footer-col h5{font-size:14px;font-weight:700;margin:0 0 16px;font-family:'Manrope',sans-serif}
+.tv-footer-col a{display:flex;align-items:center;gap:7px;font-size:13.5px;opacity:.62;padding:5px 0;color:#fff;transition:.2s}
+.tv-footer-col a:hover{opacity:1;padding-left:3px}
+.tv-footer-contact a span,.tv-footer-addr span{opacity:.7;font-size:13px}
+.tv-footer-addr{display:flex;align-items:flex-start;gap:7px;font-size:13.5px;opacity:.62;padding:5px 0;line-height:1.5}
+.tv-footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;text-align:center;font-size:12.5px;opacity:.5}
+
+/* ==========================================================================
+   LOGO ŞERİDİ + REFERANS PROJELER (case kartları)
+   ========================================================================== */
+.tv-logos-strip{background:#fff;padding:34px 0;border-bottom:1px solid var(--tv-line)}
+.tv-logos-row{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;opacity:.65}
+.tv-logos-row .lg{font-family:'Manrope',sans-serif;font-weight:800;font-size:20px;color:#7a7d70;letter-spacing:-.02em}
+
+.tv-cases-head{margin-bottom:44px}
+.tv-cases-head h2{font-size:34px}
+.tv-cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.tv-case-card .cimg{border-radius:16px;height:230px;background:var(--tv-cream);display:grid;place-items:center;color:#b7bbac;font-size:13px;margin-bottom:16px}
+.tv-case-card .ctag{font-size:12px;color:var(--tv-ink-soft);margin-bottom:6px}
+.tv-case-card h4{font-size:17px;font-weight:800;margin:0}
+
+@media(max-width:900px){
+  .tv-nav-menu{position:fixed;top:74px;left:0;right:0;background:#fff;flex-direction:column;padding:0;max-height:0;overflow:hidden;transition:max-height .3s;box-shadow:0 10px 30px rgba(0,0,0,.1)}
+  .tv-nav-menu.open{max-height:400px}
+  .tv-nav-menu ul{flex-direction:column;gap:0;padding:10px 30px}
+  .tv-nav-menu a{display:block;padding:14px 0;color:var(--tv-ink);border-bottom:1px solid var(--tv-line)}
+  .tv-nav-toggle{display:flex}
+  .tv-footer-grid{grid-template-columns:1fr 1fr;gap:30px}
+  .tv-cases-grid{grid-template-columns:1fr}
+  .tv-rev-track{grid-template-columns:1fr!important}
+}
