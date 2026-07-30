@@ -6,47 +6,63 @@
             <h2 class="tv-lang-h2">Tüm dünyada, her dilde çeviri</h2>
             <p class="tv-lang-sub">Dünya dillerinin tamamında uzman mütercim kadromuzla hizmet veriyoruz.</p>
         </div>
-        <div class="tv-lang-map">
-            <!-- silik dünya haritası -->
-            <svg class="tv-lang-worldmap" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                <image href="https://raw.githubusercontent.com/husseyyni/temp/refs/heads/main/worldmap.svg" width="1000" height="500"/>
+        <div class="tv-lang-map" id="tvLangMap">
+            <svg class="tv-lang-worldmap" viewBox="0 0 1010 500" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                <image href="<?php echo get_template_directory_uri(); ?>/worldmap.svg" width="1010" height="500"/>
             </svg>
-            <!-- bağlantı çizgileri -->
-            <svg class="tv-lang-lines" viewBox="0 0 1000 620" preserveAspectRatio="none" aria-hidden="true">
-                <g class="tv-lang-path-g">
-                    <!-- sol taraf -->
-                    <path d="M500,310 C380,310 300,150 165,150"/>
-                    <path d="M500,310 C400,310 340,255 270,255"/>
-                    <path d="M500,310 C420,310 300,340 165,340"/>
-                    <path d="M500,310 C420,320 350,410 285,430"/>
-                    <path d="M500,310 C410,340 300,480 205,500"/>
-                    <path d="M500,310 C400,360 300,560 165,560"/>
-                    <!-- sağ taraf -->
-                    <path d="M500,310 C620,310 700,150 835,150"/>
-                    <path d="M500,310 C600,310 660,235 730,235"/>
-                    <path d="M500,310 C580,310 700,340 835,340"/>
-                    <path d="M500,310 C580,320 650,410 715,430"/>
-                    <path d="M500,310 C590,340 700,480 795,500"/>
-                    <path d="M500,310 C600,360 700,560 835,560"/>
-                </g>
-            </svg>
-            <!-- merkez düğüm -->
-            <div class="tv-lang-center">
-                <span>120+<br>Dil</span>
-            </div>
-            <!-- bayrak daireleri -->
-            <div class="tv-lang-node" style="left:16.5%;top:24%;"><img src="https://flagcdn.com/w80/gb.png" alt="İngiltere"><span>İngilizce</span></div>
-            <div class="tv-lang-node" style="left:27%;top:41%;"><img src="https://flagcdn.com/w80/fr.png" alt="Fransa"><span>Fransızca</span></div>
-            <div class="tv-lang-node" style="left:16.5%;top:55%;"><img src="https://flagcdn.com/w80/es.png" alt="İspanya"><span>İspanyolca</span></div>
-            <div class="tv-lang-node" style="left:28.5%;top:69.5%;"><img src="https://flagcdn.com/w80/it.png" alt="İtalya"><span>İtalyanca</span></div>
-            <div class="tv-lang-node" style="left:20.5%;top:80.5%;"><img src="https://flagcdn.com/w80/nl.png" alt="Hollanda"><span>Flemenkçe</span></div>
-            <div class="tv-lang-node" style="left:16.5%;top:90%;"><img src="https://flagcdn.com/w80/de.png" alt="Almanya"><span>Almanca</span></div>
-            <div class="tv-lang-node" style="left:83.5%;top:24%;"><img src="https://flagcdn.com/w80/tr.png" alt="Türkiye"><span>Türkçe</span></div>
-            <div class="tv-lang-node" style="left:73%;top:38%;"><img src="https://flagcdn.com/w80/ru.png" alt="Rusya"><span>Rusça</span></div>
-            <div class="tv-lang-node" style="left:83.5%;top:55%;"><img src="https://flagcdn.com/w80/cn.png" alt="Çin"><span>Çince</span></div>
-            <div class="tv-lang-node" style="left:71.5%;top:69.5%;"><img src="https://flagcdn.com/w80/jp.png" alt="Japonya"><span>Japonca</span></div>
-            <div class="tv-lang-node" style="left:79.5%;top:80.5%;"><img src="https://flagcdn.com/w80/kr.png" alt="Kore"><span>Korece</span></div>
-            <div class="tv-lang-node" style="left:83.5%;top:90%;"><img src="https://flagcdn.com/w80/sa.png" alt="Suudi Arabistan"><span>Arapça</span></div>
+            <svg class="tv-lang-lines" id="tvLangLines" preserveAspectRatio="none" aria-hidden="true"></svg>
+            <div class="tv-lang-center" id="tvLangCenter"><span>120+<br>Dil</span></div>
+            <div class="tv-lang-node" data-x="15" data-y="20"><img src="https://flagcdn.com/w80/gb.png" alt="İngiltere"><span>İngilizce</span></div>
+            <div class="tv-lang-node" data-x="26" data-y="37"><img src="https://flagcdn.com/w80/fr.png" alt="Fransa"><span>Fransızca</span></div>
+            <div class="tv-lang-node" data-x="14" data-y="54"><img src="https://flagcdn.com/w80/es.png" alt="İspanya"><span>İspanyolca</span></div>
+            <div class="tv-lang-node" data-x="27" data-y="70"><img src="https://flagcdn.com/w80/it.png" alt="İtalya"><span>İtalyanca</span></div>
+            <div class="tv-lang-node" data-x="17" data-y="85"><img src="https://flagcdn.com/w80/nl.png" alt="Hollanda"><span>Flemenkçe</span></div>
+            <div class="tv-lang-node" data-x="30" data-y="97"><img src="https://flagcdn.com/w80/de.png" alt="Almanya"><span>Almanca</span></div>
+            <div class="tv-lang-node" data-x="85" data-y="20"><img src="https://flagcdn.com/w80/tr.png" alt="Türkiye"><span>Türkçe</span></div>
+            <div class="tv-lang-node" data-x="74" data-y="37"><img src="https://flagcdn.com/w80/ru.png" alt="Rusya"><span>Rusça</span></div>
+            <div class="tv-lang-node" data-x="86" data-y="54"><img src="https://flagcdn.com/w80/cn.png" alt="Çin"><span>Çince</span></div>
+            <div class="tv-lang-node" data-x="73" data-y="70"><img src="https://flagcdn.com/w80/jp.png" alt="Japonya"><span>Japonca</span></div>
+            <div class="tv-lang-node" data-x="83" data-y="85"><img src="https://flagcdn.com/w80/kr.png" alt="Kore"><span>Korece</span></div>
+            <div class="tv-lang-node" data-x="70" data-y="97"><img src="https://flagcdn.com/w80/sa.png" alt="Suudi Arabistan"><span>Arapça</span></div>
         </div>
     </div>
 </section>
+<script>
+(function(){
+  function drawLines(){
+    var map=document.getElementById('tvLangMap');
+    var lines=document.getElementById('tvLangLines');
+    var center=document.getElementById('tvLangCenter');
+    if(!map||!lines||!center)return;
+    var mr=map.getBoundingClientRect();
+    var cr=center.getBoundingClientRect();
+    var cx=cr.left-mr.left+cr.width/2;
+    var cy=cr.top-mr.top+cr.height/2;
+    lines.setAttribute('viewBox','0 0 '+mr.width+' '+mr.height);
+    var nodes=map.querySelectorAll('.tv-lang-node');
+    var paths='';
+    nodes.forEach(function(n){
+      var img=n.querySelector('img');
+      var ir=img.getBoundingClientRect();
+      var nx=ir.left-mr.left+ir.width/2;
+      var ny=ir.top-mr.top+ir.height/2;
+      var mx=(cx+nx)/2;
+      paths+='<path d="M'+cx+','+cy+' C'+mx+','+cy+' '+mx+','+ny+' '+nx+','+ny+'" fill="none" stroke="#77846A" stroke-width="1.6" stroke-dasharray="2 6" stroke-linecap="round" opacity="0.6"/>';
+    });
+    lines.innerHTML=paths;
+  }
+  function init(){
+    var imgs=document.querySelectorAll('#tvLangMap .tv-lang-node img');
+    var done=0,total=imgs.length;
+    imgs.forEach(function(im){
+      if(im.complete){done++;}
+      else{im.addEventListener('load',function(){done++;if(done>=total)drawLines();});im.addEventListener('error',function(){done++;if(done>=total)drawLines();});}
+    });
+    drawLines();
+    setTimeout(drawLines,300);
+  }
+  if(document.readyState!=='loading')init();else document.addEventListener('DOMContentLoaded',init);
+  window.addEventListener('resize',drawLines);
+  window.addEventListener('load',drawLines);
+})();
+</script>
