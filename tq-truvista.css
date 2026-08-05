@@ -1,0 +1,776 @@
+/* ==========================================================================
+   Teklif Al Sayfası — Truvista Teması
+   ========================================================================== */
+
+/* ── Sayfa yapısı ── */
+.phi--compact { padding: 40px 0 36px; }
+
+.tq-page { background: #F3F4EF; padding: 40px 0 80px; }
+
+.tq-layout {
+    display: grid;
+    gap: 28px;
+    align-items: start;
+}
+@media (min-width: 1024px) {
+    .tq-layout { grid-template-columns: 1fr 360px; }
+}
+
+/* ── Adım kartları ── */
+.tq-form { display: flex; flex-direction: column; gap: 16px; }
+
+.tq-step {
+    background: #fff;
+    border: 1px solid #E6E6DF;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.tq-step__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 22px;
+    border-bottom: 1px solid #E6E6DF;
+    background: #F3F4EF;
+}
+
+.tq-step__num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: #77846A;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+
+.tq-step__title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.tq-step__privacy {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #6A6E60;
+}
+
+.tq-step__body { padding: 20px 22px; }
+
+/* ── Dil satırı ── */
+.tq-lang-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: end;
+    gap: 12px;
+}
+
+.tq-lang-arrow {
+    color: #77846A;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+/* ── Form elemanları ── */
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #26291F;
+}
+
+.form-group select,
+.tq-input,
+.tq-textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid #E6E6DF;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1a1a1a;
+    background: #fff;
+    transition: border-color .2s;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.form-group select:focus,
+.tq-input:focus,
+.tq-textarea:focus {
+    outline: none;
+    border-color: #77846A;
+    box-shadow: 0 0 0 3px rgba(119,132,106,.12);
+}
+
+.tq-textarea { resize: vertical; min-height: 120px; }
+
+.tq-input-hint {
+    font-size: 12px;
+    color: #6A6E60;
+    margin-top: 4px;
+}
+
+/* ── Mod sekmeleri ── */
+.tq-mode-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.tq-mode-tab {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 16px;
+    border: 1.5px solid #E6E6DF;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6A6E60;
+    cursor: pointer;
+    transition: all .2s;
+    background: #fff;
+}
+
+.tq-mode-tab input { display: none; }
+
+.tq-mode-tab.is-active {
+    border-color: #77846A;
+    background: #EDF0E8;
+    color: #3f4a37;
+}
+
+/* ── Drop zone ── */
+.tq-drop-zone {
+    border: 2px dashed #C8CCBE;
+    border-radius: 12px;
+    padding: 36px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all .2s;
+    background: #F3F4EF;
+}
+
+.tq-drop-zone:hover,
+.tq-drop-zone.is-over {
+    border-color: #77846A;
+    background: #EDF0E8;
+}
+
+.tq-drop-zone.is-done {
+    border-color: #77846A;
+    background: #EDF0E8;
+    border-style: solid;
+}
+
+.tq-file-hidden { display: none; }
+
+.tq-drop-zone__icon { color: #77846A; margin-bottom: 10px; }
+
+.tq-drop-zone__title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 6px;
+}
+
+.tq-drop-zone__hint {
+    font-size: 12px;
+    color: #6A6E60;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.tq-file-status {
+    font-size: 12px;
+    color: #6A6E60;
+    margin: 8px 0 0;
+}
+
+.tq-spinner {
+    display: inline-block;
+    width: 18px; height: 18px;
+    border: 2px solid #E6E6DF;
+    border-top-color: #77846A;
+    border-radius: 50%;
+    animation: tq-spin .7s linear infinite;
+    margin-top: 8px;
+}
+
+@keyframes tq-spin { to { transform: rotate(360deg); } }
+
+.tq-text-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.tq-wc-badge {
+    font-size: 12px;
+    background: #EDF0E8;
+    color: #3f4a37;
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-weight: 600;
+}
+
+.tq-text-hint { font-size: 12px; color: #6A6E60; }
+
+/* ── Sipariş sınıfı kartları ── */
+.tq-radio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+@media (min-width: 640px) {
+    .tq-radio-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.tq-radio-card { cursor: pointer; }
+.tq-radio-card input { display: none; }
+
+.tq-radio-card__inner {
+    border: 1.5px solid #E6E6DF;
+    border-radius: 10px;
+    padding: 14px 12px;
+    text-align: center;
+    transition: all .2s;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.tq-radio-card input:checked + .tq-radio-card__inner {
+    border-color: #77846A;
+    background: #EDF0E8;
+}
+
+.tq-radio-card__icon { color: #77846A; }
+
+.tq-radio-card__title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.tq-radio-card__desc {
+    font-size: 11px;
+    color: #6A6E60;
+}
+
+/* ── Hizmet kademeleri ── */
+.tq-tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+@media (max-width: 640px) {
+    .tq-tiers { grid-template-columns: 1fr; }
+}
+
+.tq-tier-card { cursor: pointer; }
+.tq-tier-card input { display: none; }
+
+.tq-tier-card__inner {
+    border: 1.5px solid #E6E6DF;
+    border-radius: 12px;
+    padding: 18px 14px;
+    transition: all .2s;
+    background: #fff;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.tq-tier-card.is-active .tq-tier-card__inner,
+.tq-tier-card input:checked + .tq-tier-card__inner {
+    border-color: #77846A;
+    background: #EDF0E8;
+    box-shadow: 0 4px 16px rgba(119,132,106,.12);
+}
+
+.tq-tier-card__top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.tq-tier-badge {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.tq-tier-badge--premium { background: #26291F; color: #fff; }
+.tq-tier-badge--pro { background: #77846A; color: #fff; }
+.tq-tier-badge--eco { background: #EDF0E8; color: #3f4a37; }
+
+.tq-tier-popular {
+    font-size: 10px;
+    font-weight: 700;
+    color: #77846A;
+}
+
+.tq-tier-card__sub {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 2px;
+}
+
+.tq-tier-card__exp {
+    font-size: 12px;
+    color: #6A6E60;
+    margin: 0 0 10px;
+}
+
+.tq-tier-card__features {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tq-tier-card__features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 12px;
+    color: #26291F;
+}
+
+.tq-tier-card__features svg { color: #77846A; flex-shrink: 0; margin-top: 2px; }
+
+.tq-tier-card__link {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 12px;
+    color: #77846A;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* ── Teslimat kartları ── */
+.tq-delivery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+@media (max-width: 540px) {
+    .tq-delivery-grid { grid-template-columns: 1fr; }
+}
+
+.tq-delivery-card { cursor: pointer; }
+.tq-delivery-card input { display: none; }
+
+.tq-delivery-card__inner {
+    border: 1.5px solid #E6E6DF;
+    border-radius: 10px;
+    padding: 16px 12px;
+    text-align: center;
+    transition: all .2s;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.tq-delivery-card input:checked + .tq-delivery-card__inner {
+    border-color: #77846A;
+    background: #EDF0E8;
+}
+
+.tq-delivery-card__icon { color: #77846A; margin-bottom: 2px; }
+
+.tq-delivery-card__title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.tq-delivery-card__days {
+    font-size: 12px;
+    color: #6A6E60;
+}
+
+.tq-delivery-card__price {
+    font-size: 11px;
+    font-weight: 600;
+    color: #77846A;
+    background: #EDF0E8;
+    border-radius: 4px;
+    padding: 2px 7px;
+    margin-top: 2px;
+}
+
+/* ── Ek hizmetler ── */
+.tq-extras-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tq-extra-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1.5px solid #E6E6DF;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .2s;
+    background: #fff;
+}
+
+.tq-extra-item:hover { border-color: #AAB99A; background: #F3F4EF; }
+
+.tq-extra-item input { display: none; }
+
+.tq-extra-item input:checked ~ .ik-check-box {
+    background: #77846A;
+    border-color: #77846A;
+}
+
+.tq-extra-item input:checked ~ .ik-check-box::after { opacity: 1; }
+
+.tq-extra-item input:checked ~ .tq-extra-item__text { color: #26291F; }
+
+.ik-check-box {
+    width: 18px; height: 18px;
+    border: 2px solid #C8CCBE;
+    border-radius: 4px;
+    flex-shrink: 0;
+    position: relative;
+    transition: all .2s;
+    margin-top: 2px;
+}
+
+.ik-check-box::after {
+    content: '';
+    position: absolute;
+    left: 4px; top: 1px;
+    width: 6px; height: 10px;
+    border: 2px solid #fff;
+    border-top: none; border-left: none;
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity .15s;
+}
+
+.tq-extra-item__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 13px;
+    color: #1a1a1a;
+}
+
+.tq-extra-item__text strong { font-weight: 700; }
+.tq-extra-item__text small { color: #6A6E60; font-size: 12px; }
+
+.tq-extras-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    font-size: 12px;
+    color: #6A6E60;
+    margin-top: 12px;
+    line-height: 1.6;
+}
+
+.tq-noter-notice {
+    background: #EDF0E8;
+    border: 1px solid #AAB99A;
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: #3f4a37;
+}
+
+.tq-extras-subgrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.tq-extras-subgrid__col { display: flex; flex-direction: column; gap: 8px; }
+
+.tq-extra-item--tall { flex: 1; height: 100%; }
+
+/* ── Ödeme yöntemi ── */
+.tq-payment-method-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.tq-payment-method-card { cursor: pointer; }
+.tq-payment-method-card input { display: none; }
+
+.tq-payment-method-card__inner {
+    border: 1.5px solid #E6E6DF;
+    border-radius: 10px;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+    transition: all .2s;
+    background: #fff;
+}
+
+.tq-payment-method-card.is-active .tq-payment-method-card__inner,
+.tq-payment-method-card input:checked + .tq-payment-method-card__inner {
+    border-color: #77846A;
+    background: #EDF0E8;
+}
+
+.tq-payment-method-card__inner svg { color: #77846A; }
+
+.tq-payment-method-card__title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.tq-payment-method-card__desc {
+    font-size: 11px;
+    color: #6A6E60;
+}
+
+/* ── Sipariş özeti (sağ panel) ── */
+.tq-summary-col { position: sticky; top: 100px; }
+
+.tq-summary {
+    background: #fff;
+    border: 1px solid #E6E6DF;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.tq-summary__head {
+    padding: 18px 20px;
+    background: #77846A;
+}
+
+.tq-summary__title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+    letter-spacing: -.01em;
+}
+
+.tq-summary__section {
+    padding: 14px 20px;
+    border-bottom: 1px solid #E6E6DF;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tq-summary__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.tq-summary__label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #6A6E60;
+}
+
+.tq-summary__val {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-align: right;
+}
+
+.tq-summary__row--highlight {
+    background: #F3F4EF;
+    margin: 0 -20px;
+    padding: 8px 20px;
+    border-radius: 0;
+}
+
+.tq-summary__val--big {
+    font-size: 15px;
+    font-weight: 800;
+    color: #3f4a37;
+}
+
+.tq-summary__est-note {
+    font-size: 11px;
+    color: #6A6E60;
+    margin: 0;
+    font-style: italic;
+}
+
+.tq-summary__section--price { background: #F3F4EF; }
+
+.tq-summary__total {
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #EDF0E8;
+    border-top: 2px solid #AAB99A;
+}
+
+.tq-summary__total-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #3f4a37;
+}
+
+.tq-summary__total-price {
+    font-size: 22px;
+    font-weight: 800;
+    color: #3f4a37;
+    letter-spacing: -.02em;
+}
+
+/* ── KVKK onay ── */
+.tq-kvkk-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 20px;
+    cursor: pointer;
+    border-top: 1px solid #E6E6DF;
+}
+
+.tq-kvkk-consent__text {
+    font-size: 12px;
+    color: #6A6E60;
+    line-height: 1.6;
+}
+
+.tq-kvkk-consent__text a {
+    color: #3f4a37;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* ── Gönder butonu ── */
+.tq-submit-btn {
+    width: calc(100% - 40px);
+    margin: 14px 20px;
+    padding: 14px;
+    background: #3f4a37;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background .2s;
+    font-family: inherit;
+}
+
+.tq-submit-btn:hover:not(:disabled) { background: #77846A; }
+
+.tq-submit-btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.tq-submit-error {
+    font-size: 12px;
+    color: #c0392b;
+    padding: 0 20px 10px;
+    margin: 0;
+}
+
+.tq-summary__disclaimer {
+    font-size: 11px;
+    color: #6A6E60;
+    text-align: center;
+    padding: 0 20px 12px;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.tq-summary__trust {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    padding: 12px 20px 16px;
+    border-top: 1px solid #E6E6DF;
+    flex-wrap: wrap;
+}
+
+.tq-summary__trust span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #6A6E60;
+    font-weight: 600;
+}
+
+.tq-summary__trust svg { color: #77846A; }
+
+/* ── İndirim kodu ── */
+.tq-coupon-row {
+    display: flex;
+    gap: 8px;
+    padding: 12px 20px;
+    border-top: 1px solid #E6E6DF;
+}
+
+.tq-coupon-input {
+    flex: 1;
+    padding: 9px 12px;
+    border: 1.5px solid #E6E6DF;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: inherit;
+}
+
+.tq-coupon-btn {
+    padding: 9px 16px;
+    background: #EDF0E8;
+    color: #3f4a37;
+    border: 1.5px solid #AAB99A;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background .2s;
+}
+
+.tq-coupon-btn:hover { background: #AAB99A; color: #fff; }
+
+/* ── req star ── */
+.ik-req-star { color: #c0392b; }
