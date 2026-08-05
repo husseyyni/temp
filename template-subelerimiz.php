@@ -29,10 +29,10 @@ $filtreler = [];
 $subeler   = [];
 
 foreach ($ofisler as $i => $ofis) {
-    $oid      = $ofis->ID;
+    $oid       = $ofis->ID;
     $etiketler = get_the_terms($oid, 'post_tag');
-    $slugler  = [];
-    $sehir    = '';
+    $slugler   = [];
+    $sehir     = '';
     if ($etiketler && !is_wp_error($etiketler)) {
         foreach ($etiketler as $et) {
             $slugler[] = $et->slug;
@@ -64,24 +64,28 @@ foreach ($ofisler as $i => $ofis) {
 <section class="sb-hero">
     <div class="sb-hero__inner">
         <div class="sb-hero__left">
-            <nav class="sb-hero__breadcrumb">
-                <a href="<?php echo esc_url(home_url('/')); ?>">Anasayfa</a>
-                <span>›</span>
-                <span>Şubelerimiz</span>
-            </nav>
             <h1 class="sb-hero__title">Şubelerimiz</h1>
             <p class="sb-hero__desc">İstanbul, Ankara, İzmir ve Birleşik Krallık ofislerimizle size en yakın noktadan hizmet veriyoruz.</p>
         </div>
         <div class="sb-hero__stats">
             <div class="sb-hero__stat">
+                <div class="sb-hero__stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
                 <span class="sb-hero__stat-num"><?php echo count($subeler); ?></span>
                 <span class="sb-hero__stat-label">Ofis</span>
             </div>
             <div class="sb-hero__stat">
+                <div class="sb-hero__stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
                 <span class="sb-hero__stat-num">4</span>
                 <span class="sb-hero__stat-label">Şehir</span>
             </div>
             <div class="sb-hero__stat">
+                <div class="sb-hero__stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
                 <span class="sb-hero__stat-num">7/24</span>
                 <span class="sb-hero__stat-label">Hizmet</span>
             </div>
@@ -103,9 +107,13 @@ foreach ($ofisler as $i => $ofis) {
 
         <!-- Harita + Liste -->
         <div class="sb-layout">
+
+            <!-- Harita -->
             <div class="sb-layout__map">
                 <div id="sb-harita"></div>
             </div>
+
+            <!-- Liste -->
             <div class="sb-layout__list" id="sb-list">
                 <?php foreach ($subeler as $s) : ?>
                 <div class="sb-card<?php echo $s['merkez'] ? ' sb-card--merkez' : ''; ?><?php echo $s['uk'] ? ' sb-card--uk' : ''; ?>"
@@ -115,46 +123,67 @@ foreach ($ofisler as $i => $ofis) {
                      data-sehir="<?php echo esc_attr(implode(' ', $s['slugler'])); ?>"
                      tabindex="0" role="button"
                      aria-label="<?php echo esc_attr($s['title']); ?>">
-                    <div class="sb-card__head">
-                        <span class="sb-card__city"><?php echo esc_html($s['sehir']); ?></span>
-                        <?php if ($s['merkez']) : ?><span class="sb-card__badge">Merkez</span><?php endif; ?>
-                        <?php if ($s['uk']) : ?><span class="sb-card__badge sb-card__badge--uk">UK</span><?php endif; ?>
+
+                    <!-- Kart Başlığı (her zaman görünür) -->
+                    <div class="sb-card__summary">
+                        <div class="sb-card__left">
+                            <div class="sb-card__head">
+                                <span class="sb-card__city"><?php echo esc_html($s['sehir']); ?></span>
+                                <?php if ($s['merkez']) : ?><span class="sb-card__badge">Merkez</span><?php endif; ?>
+                                <?php if ($s['uk']) : ?><span class="sb-card__badge sb-card__badge--uk">UK</span><?php endif; ?>
+                            </div>
+                            <h3 class="sb-card__name"><?php echo esc_html($s['title']); ?></h3>
+                        </div>
+                        <div class="sb-card__right">
+                            <?php if ($s['harita']) : ?>
+                            <a href="<?php echo esc_url($s['harita']); ?>" target="_blank" rel="noopener noreferrer" class="sb-card__act" title="Haritada Gör" onclick="event.stopPropagation()">
+                                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </a>
+                            <?php endif; ?>
+                            <?php if ($s['tel']) : ?>
+                            <a href="tel:<?php echo esc_attr(preg_replace('/\s+/', '', $s['tel'])); ?>" class="sb-card__act" title="Ara" onclick="event.stopPropagation()">
+                                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.21 12.9a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+                            </a>
+                            <?php endif; ?>
+                            <button class="sb-card__toggle" aria-label="Detayları Göster">
+                                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                            </button>
+                        </div>
                     </div>
-                    <h3 class="sb-card__name"><?php echo esc_html($s['title']); ?></h3>
-                    <?php if ($s['adres']) : ?>
-                    <p class="sb-card__row">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                        <?php echo esc_html($s['adres']); ?>
-                    </p>
-                    <?php endif; ?>
-                    <?php if ($s['tel']) : ?>
-                    <p class="sb-card__row">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.21 12.9a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
-                        <a href="tel:<?php echo esc_attr(preg_replace('/\s+/', '', $s['tel'])); ?>"><?php echo esc_html($s['tel']); ?></a>
-                    </p>
-                    <?php endif; ?>
-                    <?php if ($s['email']) : ?>
-                    <p class="sb-card__row">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                        <a href="mailto:<?php echo esc_attr($s['email']); ?>"><?php echo esc_html($s['email']); ?></a>
-                    </p>
-                    <?php endif; ?>
-                    <?php if ($s['saat']) : ?>
-                    <p class="sb-card__row">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        <?php echo esc_html($s['saat']); ?>
-                    </p>
-                    <?php endif; ?>
-                    <?php if ($s['harita']) : ?>
-                    <a href="<?php echo esc_url($s['harita']); ?>" target="_blank" rel="noopener noreferrer" class="sb-card__link">
-                        Haritada Gör
-                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                    </a>
-                    <?php endif; ?>
+
+                    <!-- Kart Detayı (accordion) -->
+                    <div class="sb-card__detail">
+                        <?php if ($s['adres']) : ?>
+                        <p class="sb-card__row">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <?php echo esc_html($s['adres']); ?>
+                        </p>
+                        <?php endif; ?>
+                        <?php if ($s['tel']) : ?>
+                        <p class="sb-card__row">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.21 12.9a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+                            <a href="tel:<?php echo esc_attr(preg_replace('/\s+/', '', $s['tel'])); ?>"><?php echo esc_html($s['tel']); ?></a>
+                        </p>
+                        <?php endif; ?>
+                        <?php if ($s['email']) : ?>
+                        <p class="sb-card__row">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            <a href="mailto:<?php echo esc_attr($s['email']); ?>"><?php echo esc_html($s['email']); ?></a>
+                        </p>
+                        <?php endif; ?>
+                        <?php if ($s['saat']) : ?>
+                        <p class="sb-card__row">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <?php echo esc_html($s['saat']); ?>
+                        </p>
+                        <?php endif; ?>
+                    </div>
+
                 </div>
                 <?php endforeach; ?>
             </div>
-        </div>
+
+        </div><!-- /.sb-layout -->
 
     </div><!-- /.sb-wrap -->
 </main>
@@ -201,7 +230,7 @@ foreach ($ofisler as $i => $ofis) {
         return L.divIcon({
             className: '',
             html: '<div class="sb-pin' + (active ? ' sb-pin--active' : '') + '"></div>',
-            iconSize: [16, 16], iconAnchor: [8, 8], popupAnchor: [0, -12]
+            iconSize: [16, 16], iconAnchor: [8, 8], popupAnchor: [0, -14]
         });
     }
 
@@ -210,36 +239,71 @@ foreach ($ofisler as $i => $ofis) {
     subeler.forEach(function(s) {
         if (!s.lat || !s.lng) return;
         var m = L.marker([s.lat, s.lng], { icon: makeIcon(false) }).addTo(map);
-        var popup = '<div class="sb-popup"><strong>' + s.title + '</strong>';
-        if (s.adres) popup += '<br>' + s.adres;
-        if (s.tel)   popup += '<br><a href="tel:' + s.tel.replace(/\s/g,'') + '">' + s.tel + '</a>';
+        var popup = '<div class="sb-popup">';
+        popup += '<strong>' + s.title + '</strong>';
+        if (s.adres) popup += '<div class="sb-popup__row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>' + s.adres + '</div>';
+        if (s.tel)   popup += '<div class="sb-popup__row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.21 12.9a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg><a href="tel:' + s.tel.replace(/\s/g,'') + '">' + s.tel + '</a></div>';
+        if (s.harita) popup += '<a href="' + s.harita + '" target="_blank" class="sb-popup__dir">Yol Tarifi Al &rarr;</a>';
         popup += '</div>';
-        m.bindPopup(popup, { maxWidth: 240 });
-        m.on('click', function(){ activate(s.id); });
+        m.bindPopup(popup, { maxWidth: 260, className: 'sb-popup-wrap' });
+        m.on('click', function(){ activateCard(s.id); });
         markers[s.id] = m;
     });
 
-    function activate(id) {
+    var activeCardId = null;
+
+    function activateCard(id) {
+        // Harita pin güncelle
         if (activeId && markers[activeId]) markers[activeId].setIcon(makeIcon(false));
-        document.querySelectorAll('.sb-card').forEach(function(el){ el.classList.remove('is-active'); });
         activeId = id;
         if (markers[id]) { markers[id].setIcon(makeIcon(true)); markers[id].openPopup(); }
+
+        // Kart vurgula
+        document.querySelectorAll('.sb-card').forEach(function(el){ el.classList.remove('is-active'); });
         var card = document.querySelector('.sb-card[data-id="' + id + '"]');
-        if (card) { card.classList.add('is-active'); card.scrollIntoView({ behavior:'smooth', block:'nearest' }); }
+        if (card) {
+            card.classList.add('is-active');
+            card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
     }
 
+    // Kart tıklama + accordion
     document.querySelectorAll('.sb-card').forEach(function(card) {
-        function go() {
+        card.addEventListener('click', function(e) {
+            // Linklere tıklanınca accordion açılmasın
+            if (e.target.closest('a')) return;
+
             var id = parseInt(card.dataset.id);
-            activate(id);
-            map.flyTo([parseFloat(card.dataset.lat), parseFloat(card.dataset.lng)], 14, { duration: 1 });
-        }
-        card.addEventListener('click', go);
-        card.addEventListener('keydown', function(e){ if (e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+            var isOpen = card.classList.contains('is-open');
+
+            // Haritaya uç
+            var lat = parseFloat(card.dataset.lat);
+            var lng = parseFloat(card.dataset.lng);
+            if (lat && lng) map.flyTo([lat, lng], 14, { duration: 1 });
+
+            activateCard(id);
+
+            // Accordion aç/kapat
+            if (isOpen) {
+                card.classList.remove('is-open');
+            } else {
+                document.querySelectorAll('.sb-card.is-open').forEach(function(c){ c.classList.remove('is-open'); });
+                card.classList.add('is-open');
+            }
+        });
+
+        card.addEventListener('keydown', function(e){
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                card.click();
+            }
+        });
     });
 
-    if (subeler.length) activate(subeler[0].id);
+    // İlk kartı aktif et
+    if (subeler.length) activateCard(subeler[0].id);
 
+    // Filtre
     document.querySelectorAll('.sb-filter__btn').forEach(function(btn) {
         btn.addEventListener('click', function() {
             document.querySelectorAll('.sb-filter__btn').forEach(function(b){ b.classList.remove('is-active'); });
@@ -263,7 +327,7 @@ foreach ($ofisler as $i => $ofis) {
 /* ===== HERO ===== */
 .sb-hero {
     background: linear-gradient(135deg, #74826A 0%, #74826A 40%, #93A182 65%, #C2D0B0 85%, #DCE9CD 100%);
-    padding: 56px 0 52px;
+    padding: 90px 0 52px;
     font-family: 'Manrope', sans-serif;
 }
 .sb-hero__inner {
@@ -271,28 +335,18 @@ foreach ($ofisler as $i => $ofis) {
     margin: 0 auto;
     padding: 0 48px;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     gap: 40px;
 }
-.sb-hero__breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    color: rgba(255,255,255,.7);
-    margin-bottom: 20px;
-}
-.sb-hero__breadcrumb a { color: rgba(255,255,255,.7); text-decoration: none; }
-.sb-hero__breadcrumb a:hover { color: #fff; }
-.sb-hero__breadcrumb span { color: rgba(255,255,255,.5); }
+.sb-hero__left { flex: 1; }
 .sb-hero__title {
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 800;
     color: #fff;
     letter-spacing: -.03em;
     line-height: 1.1;
-    margin: 0 0 16px;
+    margin: 0 0 12px;
 }
 .sb-hero__desc {
     font-size: 16px;
@@ -301,16 +355,44 @@ foreach ($ofisler as $i => $ofis) {
     margin: 0;
     max-width: 420px;
 }
+
+/* Stat kartı */
 .sb-hero__stats {
     display: flex;
-    gap: 40px;
+    gap: 0;
     flex-shrink: 0;
+    background: rgba(255,255,255,.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 20px;
+    padding: 6px 4px;
 }
 .sb-hero__stat {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
+    padding: 16px 32px;
+    position: relative;
+}
+.sb-hero__stat + .sb-hero__stat::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 14px; bottom: 14px;
+    width: 1px;
+    background: rgba(255,255,255,.22);
+}
+.sb-hero__stat-icon {
+    width: 34px; height: 34px;
+    background: rgba(255,255,255,.15);
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+}
+.sb-hero__stat-icon svg {
+    width: 16px; height: 16px;
+    stroke: #fff; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
 }
 .sb-hero__stat-num {
     font-size: 2rem;
@@ -320,11 +402,11 @@ foreach ($ofisler as $i => $ofis) {
     line-height: 1;
 }
 .sb-hero__stat-label {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     color: rgba(255,255,255,.65);
     text-transform: uppercase;
-    letter-spacing: .06em;
+    letter-spacing: .07em;
 }
 
 /* ===== ANA ===== */
@@ -344,7 +426,7 @@ foreach ($ofisler as $i => $ofis) {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
 }
 .sb-filter__btn {
     padding: 9px 22px;
@@ -365,46 +447,71 @@ foreach ($ofisler as $i => $ofis) {
 /* ===== LAYOUT ===== */
 .sb-layout {
     display: grid;
-    grid-template-columns: 1fr 380px;
-    border-radius: 14px;
-    overflow: hidden;
-    border: 1px solid #e2e5dd;
-    min-height: 520px;
+    grid-template-columns: 1fr 400px;
+    gap: 20px;
+    align-items: start;
 }
-.sb-layout__map { position: relative; }
+.sb-layout__map {
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,.08);
+    position: sticky;
+    top: 110px;
+}
 #sb-harita {
     width: 100%;
-    height: 100%;
-    min-height: 520px;
+    height: 640px;
     background: #eef0eb;
+    display: block;
 }
 .sb-layout__list {
-    background: #fff;
-    overflow-y: auto;
-    max-height: 520px;
-    border-left: 1px solid #e2e5dd;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 /* ===== KART ===== */
 .sb-card {
-    padding: 18px 22px;
-    border-bottom: 1px solid #f0f1ed;
+    background: #fff;
+    border-radius: 14px;
+    border: 1.5px solid #e8ebe3;
+    overflow: hidden;
     cursor: pointer;
-    transition: background .15s;
+    transition: border-color .18s, box-shadow .18s;
     outline: none;
     font-family: 'Manrope', sans-serif;
 }
-.sb-card:last-child { border-bottom: none; }
-.sb-card:hover { background: #f7f8f5; }
-.sb-card.is-active { background: #f3f4ef; border-left: 3px solid #77846A; padding-left: 19px; }
-.sb-card__head {
+.sb-card:hover {
+    border-color: #aab99a;
+    box-shadow: 0 4px 16px rgba(0,0,0,.07);
+}
+.sb-card.is-active {
+    border-color: #77846A;
+    box-shadow: 0 4px 20px rgba(119,132,106,.18);
+}
+
+/* Kart özet satırı */
+.sb-card__summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+}
+.sb-card__left { flex: 1; min-width: 0; }
+.sb-card__right {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 5px;
+    flex-shrink: 0;
+}
+.sb-card__head {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 3px;
 }
 .sb-card__city {
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 700;
     letter-spacing: .08em;
     text-transform: uppercase;
@@ -417,39 +524,92 @@ foreach ($ofisler as $i => $ofis) {
     border-radius: 999px;
     background: #3f4a37;
     color: #fff;
-    letter-spacing: .04em;
+    letter-spacing: .03em;
 }
 .sb-card__badge--uk { background: #4a5568; }
 .sb-card__name {
     font-size: 15px;
     font-weight: 700;
     color: #1a1a1a;
-    margin: 0 0 8px;
+    margin: 0;
     line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* İkon butonlar */
+.sb-card__act {
+    width: 34px; height: 34px;
+    border-radius: 9px;
+    border: 1.5px solid #e2e5dd;
+    background: #f8f9f6;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    color: #6A6E60;
+    transition: all .15s;
+    flex-shrink: 0;
+}
+.sb-card__act:hover { border-color: #77846A; color: #3f4a37; background: #EDF0E8; }
+.sb-card__act svg {
+    width: 14px; height: 14px;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* Toggle butonu */
+.sb-card__toggle {
+    width: 34px; height: 34px;
+    border-radius: 9px;
+    border: 1.5px solid #e2e5dd;
+    background: #f8f9f6;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    color: #6A6E60;
+    transition: all .15s;
+    flex-shrink: 0;
+}
+.sb-card__toggle:hover { border-color: #77846A; color: #3f4a37; background: #EDF0E8; }
+.sb-card__toggle svg {
+    width: 16px; height: 16px;
+    stroke: currentColor; fill: none;
+    stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+    transition: transform .25s;
+}
+.sb-card.is-open .sb-card__toggle svg { transform: rotate(180deg); }
+
+/* Accordion detay */
+.sb-card__detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s ease, padding .3s ease;
+    padding: 0 18px;
+    border-top: 0px solid #f0f1ed;
+}
+.sb-card.is-open .sb-card__detail {
+    max-height: 300px;
+    padding: 14px 18px 16px;
+    border-top: 1px solid #f0f1ed;
 }
 .sb-card__row {
     display: flex;
     align-items: flex-start;
-    gap: 7px;
+    gap: 8px;
     font-size: 12.5px;
     color: #5a6352;
-    margin: 0 0 5px;
-    line-height: 1.45;
+    margin: 0 0 7px;
+    line-height: 1.5;
 }
-.sb-card__row svg { flex-shrink: 0; margin-top: 2px; color: #aab99a; }
+.sb-card__row:last-child { margin-bottom: 0; }
+.sb-card__row svg {
+    width: 13px; height: 13px;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0; margin-top: 2px;
+    color: #aab99a;
+}
 .sb-card__row a { color: #5a6352; text-decoration: none; }
 .sb-card__row a:hover { color: #77846A; text-decoration: underline; }
-.sb-card__link {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #77846A;
-    text-decoration: none;
-    margin-top: 8px;
-}
-.sb-card__link:hover { color: #3f4a37; }
 
 /* ===== PIN ===== */
 .sb-pin {
@@ -457,21 +617,60 @@ foreach ($ofisler as $i => $ofis) {
     border-radius: 50%;
     background: #77846A;
     border: 2.5px solid #fff;
-    box-shadow: 0 1px 4px rgba(0,0,0,.25);
+    box-shadow: 0 1px 4px rgba(0,0,0,.28);
     transition: transform .18s, background .18s;
 }
 .sb-pin--active {
     width: 20px; height: 20px;
     background: #3f4a37;
     border: 3px solid #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,.35);
+    box-shadow: 0 2px 10px rgba(0,0,0,.38);
     margin-left: -3px; margin-top: -3px;
 }
 
 /* ===== POPUP ===== */
-.sb-popup { font-family: 'Manrope', sans-serif; font-size: 13px; color: #2d3328; line-height: 1.5; }
-.sb-popup strong { display: block; font-size: 14px; margin-bottom: 3px; color: #3f4a37; }
+.sb-popup-wrap .leaflet-popup-content-wrapper {
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.14);
+    padding: 0;
+    overflow: hidden;
+}
+.sb-popup-wrap .leaflet-popup-content { margin: 0; }
+.sb-popup-wrap .leaflet-popup-tip-container { display: none; }
+.sb-popup {
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    color: #2d3328;
+    line-height: 1.55;
+    padding: 16px 18px;
+    min-width: 220px;
+}
+.sb-popup strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+}
+.sb-popup__row {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 5px;
+    font-size: 12.5px;
+    color: #5a6352;
+}
+.sb-popup__row svg { flex-shrink: 0; margin-top: 2px; }
 .sb-popup a { color: #77846A; text-decoration: none; }
+.sb-popup__dir {
+    display: inline-flex; align-items: center; gap: 5px;
+    margin-top: 10px; padding: 8px 16px;
+    background: #3f4a37; color: #fff;
+    border-radius: 999px; font-size: 12px; font-weight: 700;
+    text-decoration: none; width: 100%; justify-content: center;
+    transition: background .18s;
+}
+.sb-popup__dir:hover { background: #77846A; color: #fff; }
 
 /* ===== CTA ===== */
 .sb-cta {
@@ -516,14 +715,16 @@ foreach ($ofisler as $i => $ofis) {
 
 /* ===== MOBİL ===== */
 @media (max-width: 900px) {
-    .sb-hero__inner { flex-direction: column; align-items: flex-start; gap: 28px; padding: 0 24px; }
-    .sb-hero__stats { gap: 24px; }
+    .sb-hero { padding-top: 90px; padding-bottom: 36px; }
+    .sb-hero__inner { flex-direction: column; align-items: flex-start; gap: 24px; padding: 0 24px; }
+    .sb-hero__stats { gap: 0; }
+    .sb-hero__stat { padding: 12px 20px; }
     .sb-hero__title { font-size: 2rem; letter-spacing: normal; }
     .sb-hero__desc { font-size: 15px; }
     .sb-wrap { padding: 0 20px; }
-    .sb-layout { grid-template-columns: 1fr; min-height: auto; }
-    #sb-harita { min-height: 280px; }
-    .sb-layout__list { max-height: 360px; border-left: none; border-top: 1px solid #e2e5dd; }
+    .sb-layout { grid-template-columns: 1fr; gap: 16px; }
+    .sb-layout__map { position: static; }
+    #sb-harita { height: 280px; }
     .sb-cta__inner { flex-direction: column; align-items: flex-start; padding: 0 24px; }
     .sb-cta__title { font-size: 22px; }
 }
